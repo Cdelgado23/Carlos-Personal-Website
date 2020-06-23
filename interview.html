@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<head>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="CV.css" rel="stylesheet" />
+
+    <script src="config.js"></script>
+    <script src="resources.js"></script>
+
+</head>
+
+<body class="bg-warning">
+
+    <div class="container-fluid">
+        <div class="row justify-content-center" style="margin-top:1%; margin-bottom:1%">
+            <div class="col-md-1"></div>
+            <div class=" col-md-8 nes-container bg-light is-rounded" style="border-radius:5px">
+                <div class="container-fluid">
+                    <div class="row justify-content-center">
+                        <div class="col-sm align-items-center">
+
+                            <header class="container">
+                                <div class="row ">
+                                    <div class="col-sm-3">
+                                        <button type="button" class="nes-btn is-warning"> Back </button>
+                                    </div>
+                                    <div class="col-sm-6 my-auto nes-container is-rounded" style="padding:0">
+                                        <h1 class="text-center">Ask me anything!</h1>
+                                    </div>
+                                </div>
+                            </header>
+
+                            <main class="main-content separate-element">
+                                <section class="nes-container is-dark">
+                                    <span>I will try my best answering your questions :) </span>
+                                </section>
+                                <section  id="scrollable-conversation"class="nes-container bg-info" style="overflow-y:scroll; max-height:400px;">
+                                    <section id="conversation-list" class="message-list" >
+
+                                    </section>
+                                    <h3 class="separate-element" id="waiting">Waiting response ...</h3>
+                                </section>
+
+                                <textarea id="textarea_field" class="nes-textarea separate-element"></textarea>
+
+                                <section class="nes-container is-dark separate-element">
+                                    <span>Do you want to save this conversation in a PDF file?</span>
+                                    <div>
+                                        <button type="button" class="nes-btn is-warning separate-element"> Download conversation </button>
+                                    </div>
+                                </section>
+                            </main>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="container" style="margin-top:5%">
+                    <div class="row">
+                        <div class="col-sm nes-container is-dark align-items-center">
+                            <p class="text-center">Contact me :)</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm bg-grey is-rounded text-center" style="margin-top:3%; border-radius:5px">
+                            <i class="nes-icon gmail is-large"></i>
+                            <i class="nes-icon linkedin is-large"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="Interview.js"></script>
