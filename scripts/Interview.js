@@ -26,13 +26,14 @@ function wait(state, timeout=500) {
     }
 }
 
-wait(false);
+AskQuestion("Hello", false);
 
-function AskQuestion(question) {
+function AskQuestion(question, show=true) {
 
     wait(true);
 
-    var html = '<section class="message -right container separate-element"> \
+    if (show) {
+        var html = '<section class="message -right container separate-element"> \
                     <div class="row justify-content-end" > <div class="nes-balloon from-right col-sm-9 my-auto"> \
                     <p>' + question + '</p> \
                     </div> \
@@ -42,9 +43,10 @@ function AskQuestion(question) {
                     </div > \
                     </section >';
 
-    $("#conversation-list").append(html);
+        $("#conversation-list").append(html);
 
-    $("#scrollable-conversation").animate({ scrollTop: $('#conversation-list').prop("scrollHeight") }, 1000);
+        $("#scrollable-conversation").animate({ scrollTop: $('#conversation-list').prop("scrollHeight") }, 1000);
+    }
 
     var
         params = {
@@ -53,9 +55,6 @@ function AskQuestion(question) {
         };
 
     ajaxer(API_URL + "/conversation", "POST", params, ok_cb, error);
-    //show loading ...
-
-    //call ajaxer
 
 }
 
@@ -94,7 +93,7 @@ function ok_cb(response) {
                 if (msg!="")
                     addReceivedMsg(msg, type);
             }
-        }
+        } curBadges = 0;
     }
     else {
         addReceivedMsg(response.message, "balloon");
@@ -104,7 +103,7 @@ function ok_cb(response) {
 
 
 var dicInteractiveMsg = {};
-var interactionIndex = 0;
+var interactionIndex = 1;
 
 function archiveExtraFromInteractive(type, extra) {
 
