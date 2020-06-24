@@ -21,7 +21,13 @@ function format_entry(element) {
 	});
 
 	html += '<div class="separate-element">';
-	html += '<a href="' + element.buttonLink + '" class="nes-btn is-' + element.color + '">' + element.buttonText + ' </a>';
+
+	var link = "";
+
+	if (element.color != "disabled")
+		link = 'href="' + element.buttonLink + '"';
+
+	html += '<a ' + link + 'class="nes-btn is-' + element.color + '">' + element.buttonText + ' </a>';
 	html += '</div>'
 
 	return html;
