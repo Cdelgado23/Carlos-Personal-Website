@@ -25,9 +25,9 @@ function format_entry(element) {
 	var link = "";
 
 	if (element.color != "disabled")
-		link = element.buttonLink;
+		link = 'href="' + element.buttonLink + '"';
 
-	html += '<a href="' + link + '" class="nes-btn is-' + element.color + '">' + element.buttonText + ' </a>';
+	html += '<a ' + link + 'class="nes-btn is-' + element.color + '">' + element.buttonText + ' </a>';
 	html += '</div>'
 
 	return html;
