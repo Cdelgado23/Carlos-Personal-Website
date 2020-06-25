@@ -2,6 +2,30 @@
 
 // Requires resources.js
 
+GetTopics();
+function GetTopics(){
+
+    ajaxer(API_URL + "/entrytypes", "GET", "", LoadTopics_cb, log_cb);
+}
+function LoadTopics_cb(response){
+    console.log(response.body);
+    var parsed = parseData(response.body);
+    for (x in parsed){
+        addTopic(parsed[x].entryType);
+    }
+}
+function addTopic(entry){
+    var html = "<li id=\"topic" + entry +"\">"+ entry +"</li>";
+    $("#topics-list").append(html);   
+}
+
+function strikeTopic(topic){
+    console.log("topic" + topic);
+    $("#topic"+topic).empty();
+    $("#topic"+topic).append("<s>"+topic+"</s>");
+}
+
+
 $("#textarea_field").keyup(function (event) {
     if (event.keyCode === 13) {
 
@@ -20,16 +44,18 @@ var user_id_str = Math.random().toString();
 
 function wait(state, timeout=500) {
     if (state) {
+        numQuestions++;
         $("#waiting").show(timeout);
-    } else {
-        $("#waiting").hide();
+    } else{
+        numQuestions--;
+        if (numQuestions==0){
+            $("#waiting").hide();
+        }
     }
 }
 
-AskQuestion("Hello", false);
-
+var numQuestions=0;
 function AskQuestion(question, show=true) {
-
     wait(true);
 
     if (show) {
@@ -60,6 +86,7 @@ function AskQuestion(question, show=true) {
 
 function error() {
     addReceivedMsg("I think something went wrong, why don't you try again?", "balloon");
+
     wait(false);
 }
 
@@ -71,9 +98,14 @@ function ok_cb(response) {
 
     if (response.messageFormat == "CustomPayload") {
         var parsed = parseData(response.message);
-        console.log(parsed);
-        console.log(parsed[parsed.length - 1]);
-        var intro = parsed[parsed.length - 1]["introduction"];
+
+        var introEntry= parsed[parsed.length - 1];
+        if (introEntry.hide == true){
+            addTopic(introEntry.entryType);
+        }
+        strikeTopic(introEntry.entryType);
+
+        var intro = introEntry["introduction"];
         if (intro!="")
             addReceivedMsg(intro, "balloon");
         parsed.splice(parsed.length - 1, 1);
@@ -223,3 +255,11 @@ function Hide(id) {
 function AddClass(id, newClass) {
     $("#" + id).addClass(newClass);
 }
+
+$("#AskHelpButton").click(function (e) {
+    AskQuestion("I need help");
+});
+
+
+
+AskQuestion("hello", false);

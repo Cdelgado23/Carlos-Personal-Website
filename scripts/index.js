@@ -47,6 +47,7 @@ function set_entries(response) {
 	parsed.sort(function (a, b) { return b.entryid - a.entryid });
 	parsed.forEach(element => AddEntry(format_entry(element)));
 
+
 }
 
 //gets the index entries from the bd
