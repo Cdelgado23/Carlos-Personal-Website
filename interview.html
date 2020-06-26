@@ -51,10 +51,10 @@
 
                                 <textarea id="textarea_field" class="nes-textarea separate-element"></textarea>
 
-                                <section class="nes-container is-dark separate-element">
-                                    <span>Do you want to save this conversation in a PDF file?</span>
+                                <section class="nes-container is-dark separate-element text-center">
+                                    <span>Do you need help?</span>
                                     <div>
-                                        <button type="button" class="nes-btn is-warning separate-element"> Download conversation </button>
+                                        <button id ="AskHelpButton" type="button" class="nes-btn is-warning separate-element"> Ask for help</button>
                                     </div>
                                 </section>
                             </main>
@@ -74,6 +74,23 @@
                         <div class="col-sm bg-grey is-rounded text-center" style="margin-top:3%; border-radius:5px">
                             <i class="nes-icon gmail is-large"></i>
                             <i class="nes-icon linkedin is-large"></i>
+                        </div>
+                    </div>
+                    <div class="row separate-element nes-container is-rounded bg-light" style="padding:0;">
+                        <div class="col-sm">
+                            <div>
+                                <h3 class="text-center separate-element">Topics</h3>
+                            </div>
+                            <div class="lists">
+                                <ul id="topics-list" class="nes-list is-disc">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row separate-element" >
+                        <div class="col-sm text-center " >
+                            <h3 class="separate-element">Progress</h3>
+                            <progress id="topics-progress" class="separate nes-progress" value="0" max="100" style="width:90%; padding:0"></progress>
                         </div>
                     </div>
                 </div>

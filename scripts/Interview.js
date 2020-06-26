@@ -2,6 +2,96 @@
 
 // Requires resources.js
 
+GetTopics();
+function GetTopics(){
+
+    ajaxer(API_URL + "/entrytypes", "GET", "", LoadTopics_cb, log_cb);
+}
+
+var hiddenTopics=0,
+    discoveredTopics=0;
+
+var totalTopics=0,
+    receivedTopics=0,
+    topicslist=[],
+    progressxtopic=0;
+
+function updateProgressBar(progress){
+    console.log(progress);
+
+
+    var prevProgress = $("#topics-progress").val();
+
+
+    updateProgressBarColor(prevProgress, progress);
+
+    $("#topics-progress").val(progress);
+}
+
+function updateProgressBarColor(prevProgress, curProgress){
+    var firstQuarter = "",
+    secondQuarter = "is-error",
+    thirdQuarter = "is-primary",
+    FourthQuarter = "is-success";
+
+    if (prevProgress>=25 && prevProgress <50){
+        $("#topics-progress").removeClass(secondQuarter);
+    }else if (prevProgress>=50 && prevProgress <75){
+        $("#topics-progress").removeClass(thirdQuarter);
+    }else if (prevProgress>=75 ){
+        $("#topics-progress").removeClass(fourthQuarter);
+    }
+
+    if (curProgress>=25 && curProgress <50){
+        $("#topics-progress").addClass(secondQuarter);
+    }else if (curProgress>=50 && curProgress <75){
+        $("#topics-progress").addClass(thirdQuarter);
+    }else if (curProgress>=75 ){
+        $("#topics-progress").addClass(fourthQuarter);
+    }
+
+}
+
+
+function LoadTopics_cb(response){
+    console.log(response.body);
+    var parsed = parseData(response.body);
+    for (x in parsed){
+        addTopic(parsed[x].entryType);
+        totalTopics++;
+    }
+
+    progressxtopic=100/totalTopics;
+    console.log(progressxtopic);
+}
+function addTopic(entry){
+    var id="topic"+entry;
+    if (entry=="???"){
+        id="hidden"+hiddenTopics;
+        hiddenTopics++;
+    }
+    var html = "<li id=\""+ id +"\">"+ entry +"</li>";
+    $("#topics-list").append(html);   
+}
+
+function strikeTopic(topic){
+    console.log("topic" + topic);
+
+    topicslist.push(topic);
+    receivedTopics++;
+    updateProgressBar(progressxtopic*receivedTopics);
+
+    $("#topic"+topic).empty();
+    $("#topic"+topic).append("<s>"+topic+"</s>");
+}
+function discoverTopic(topic){
+
+    $("#hidden"+discoveredTopics).remove();
+    addTopic(topic);
+    strikeTopic(topic);
+    discoveredTopics++;
+}
+
 $("#textarea_field").keyup(function (event) {
     if (event.keyCode === 13) {
 
@@ -9,8 +99,10 @@ $("#textarea_field").keyup(function (event) {
 
         $("#textarea_field").val("");
 
-        AskQuestion(content);
-
+        console.log("content ."+ content +".");
+        if (content!="\n"){
+            AskQuestion(content);
+        }
     }
 });
 
@@ -20,16 +112,18 @@ var user_id_str = Math.random().toString();
 
 function wait(state, timeout=500) {
     if (state) {
+        numQuestions++;
         $("#waiting").show(timeout);
-    } else {
-        $("#waiting").hide();
+    } else{
+        numQuestions--;
+        if (numQuestions==0){
+            $("#waiting").hide();
+        }
     }
 }
 
-AskQuestion("Hello", false);
-
+var numQuestions=0;
 function AskQuestion(question, show=true) {
-
     wait(true);
 
     if (show) {
@@ -60,6 +154,7 @@ function AskQuestion(question, show=true) {
 
 function error() {
     addReceivedMsg("I think something went wrong, why don't you try again?", "balloon");
+
     wait(false);
 }
 
@@ -71,9 +166,17 @@ function ok_cb(response) {
 
     if (response.messageFormat == "CustomPayload") {
         var parsed = parseData(response.message);
-        console.log(parsed);
-        console.log(parsed[parsed.length - 1]);
-        var intro = parsed[parsed.length - 1]["introduction"];
+
+        var introEntry= parsed[parsed.length - 1];
+
+        if (!topicslist.includes(introEntry.entryType)){
+            if (introEntry.hide == true){
+                discoverTopic(introEntry.entryType);
+            }else
+                strikeTopic(introEntry.entryType);
+        }
+
+        var intro = introEntry["introduction"];
         if (intro!="")
             addReceivedMsg(intro, "balloon");
         parsed.splice(parsed.length - 1, 1);
@@ -223,3 +326,11 @@ function Hide(id) {
 function AddClass(id, newClass) {
     $("#" + id).addClass(newClass);
 }
+
+$("#AskHelpButton").click(function (e) {
+    AskQuestion("I need help");
+});
+
+
+
+AskQuestion("hello", false);
