@@ -32,7 +32,7 @@ function updateProgressBarColor(prevProgress, curProgress){
     var firstQuarter = "",
     secondQuarter = "is-error",
     thirdQuarter = "is-primary",
-    FourthQuarter = "is-success";
+    fourthQuarter = "is-success";
 
     if (prevProgress>=25 && prevProgress <50){
         $("#topics-progress").removeClass(secondQuarter);
