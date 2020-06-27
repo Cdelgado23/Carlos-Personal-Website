@@ -1,6 +1,4 @@
 
-var API_URL = "https://cxqk60g9o1.execute-api.eu-west-1.amazonaws.com/dev"
-
 //ajax call
 function ajaxer(url, type, params, ok_cb, fail_cb) {
 
