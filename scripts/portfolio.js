@@ -22,7 +22,7 @@ function formatEntry(project) {
     <h4 class=" "> ' + project.CVContent.Title + '</h4>\
     <span>' + project.CVContent.Description + '</span>\
     <div class="separate-element">\
-    <a href="' + project.CVContent.Resource + '" class="nes-btn is-error">See More</a>\
+    <a href="' + project.CVContent.Resource + '" class="nes-btn is-success">See More</a>\
     </div>\
     </section>';
 
