@@ -34,3 +34,5 @@ These are the services we will build our architecture with:
 Also we will need to know a little bit about **IAM** in order to make it secure enough. 
 
 To be sure we will not be charged, or the charges will be minimal (a couple of cents in the worst scenario), we will use **AWS Budges**. You either have to make a big mistake while doing this small project, or become real famous to be charged for it, so don't worry, both things are higly unlikly to happend.
+
+![OPENCV Architecture](https://drive.google.com/file/d/1_t63x8RLSDZBxHxmsD3vdhxocSlE7xEs/view?usp=sharing)
