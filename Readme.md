@@ -19,12 +19,12 @@ If you know already a little bit about Front, you will probably go for something
 
 The BackEnd is working on Amazon Web Services. Yes, this is about AWS. It is making use only of the free tier.  
 
-These are the services we will build our architecture with:
-- **DynamoDB** - This will be our database. If you are familiar with NoSQL databases this will not be a problem. 
-- **Lambda** - A serverless computing solution. There are a number of languages availables. Still, if you are not familiar with any of them, do not worry. We will keep our code on the back really simple. 
-- **S3** - We will use this service to store objects (files and pictures mainly)
-- **API Gateway** - The endpoints of our Back. We will create a couple REST APIs to conect FrontEnd and BackEnd. 
-- **CloudFront** - A content distribution network. We will reach every corner of the world with this services. 
+These are the services the architecture with:
+- **DynamoDB** - This is the database. No SQL database.
+- **Lambda** - A serverless computing solution. There are a number of languages availables. The simpler and faster the code is, the cheaper (if the free tier is not enough). In my case, this is 100% python. 
+- **S3** - Service to store objects (files and pictures mainly)
+- **API Gateway** - The endpoints of the Back. A couple REST APIs to conect FrontEnd and BackEnd. 
+- **CloudFront** - A content distribution network. It makes the page accesible from every corner of the world. 
 
 Trasversaly I used **IAM** in order to make it secure enough. 
 
