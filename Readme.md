@@ -19,7 +19,7 @@ If you know already a little bit about Front, you will probably go for something
 
 The BackEnd is working on Amazon Web Services. Yes, this is about AWS. It is making use only of the free tier.  
 
-These are the services the architecture with:
+These are the services the architecture is based on:
 - **DynamoDB** - This is the database. No SQL database.
 - **Lambda** - A serverless computing solution. There are a number of languages availables. The simpler and faster the code is, the cheaper (if the free tier is not enough). In my case, this is 100% python. 
 - **S3** - Service to store objects (files and pictures mainly)
